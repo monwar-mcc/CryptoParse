@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#e9e9e9"
+    android:layout_height="match_parent"
+    tools:context="com.example.admin.cryptoparse.CoinDetails">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_margin="6dp"
+        app:cardElevation="6dp"
+        android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:text="Coin Details"
+    android:textSize="35sp"
+    android:id="@+id/title"
+    android:textColor="@android:color/black"
+    android:layout_alignParentTop="true"
+    />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:id="@+id/details"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="8dp"
+        android:textSize="35sp"/>
+    </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>
