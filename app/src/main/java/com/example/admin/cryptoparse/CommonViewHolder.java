@@ -5,16 +5,12 @@ import android.view.View;
 import android.widget.TextView;
 
 
-public class MyViewHolder extends RecyclerView.ViewHolder{
-
-    public TextView rank, name;
-
-    public MyViewHolder(View itemView) {
+public class CommonViewHolder extends RecyclerView.ViewHolder {
+    TextView rank, name;
+    public CommonViewHolder(View itemView) {
         super(itemView);
 
         rank = itemView.findViewById(R.id.ranking);
         name = itemView.findViewById(R.id.name);
     }
-
-
 }

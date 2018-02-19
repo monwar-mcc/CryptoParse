@@ -15,11 +15,11 @@ public class CoinDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coin_details);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        item = (Item) getIntent().getSerializableExtra("data");
-//        Log.d("data", item.toString());
+        item = (Item) getIntent().getSerializableExtra("data");
+        Log.d("data", item.toString());
         textView=findViewById(R.id.details);
-        long lg=System.currentTimeMillis();
-        textView.setText("Rank "+"1"+"\n"+"Name "+"Bitcoin0"+"\n"+"Price "+"10,751.55"+" USD"+"\n"+"Last Updated \n"+new Date(lg));
+        long lg=Long.parseLong(item.getLast_updated());
+        textView.setText("Rank "+"1"+"\n"+"Name "+item.getName()+"\n"+"Price "+item.getPrice_usd()+" USD"+"\n"+"Last Updated \n"+new Date(lg));
     }
 
     @Override

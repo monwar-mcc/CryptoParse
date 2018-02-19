@@ -20,11 +20,7 @@ static Context context;
         OnLoadMoreListener loadMoreListener;
         boolean isLoading = false, isMoreDataAvailable = true;
 
-    /*
-    * isLoading - to set the remote loading and complete status to fix back to back load more call
-    * isMoreDataAvailable - to set whether more data from server available or not.
-    * It will prevent useless load more request even after all the server data loaded
-    * */
+
 
 
 public MyAdapter(Context context, List<Item> movies) {

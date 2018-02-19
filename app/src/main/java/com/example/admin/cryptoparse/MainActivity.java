@@ -29,19 +29,43 @@ public class MainActivity extends AppCompatActivity {
     ProgressBar progressBar;
     MyAdapter myAdapter;
     List<Item>dummy=new ArrayList<>();
+    RecyclerViewAdapter recyclerViewAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        recyclerView=findViewById(R.id.recyclerview);
-        progressBar=findViewById(R.id.progress);
+        initView();
         getProductData();
+        initListener();
 
     }
 
+    private void initListener() {
+
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getApplicationContext(),
+                recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent(MainActivity.this, CoinDetails.class);
+                intent.putExtra("data", list.get(position));
+                startActivity(intent);
+            }
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+
+            }
+        }));
+    }
+
+    public void initView(){
+
+        recyclerView=findViewById(R.id.recyclerview);
+        progressBar=findViewById(R.id.progress);
+    }
     public void getProductData(){
 
-        Retrofit retrofit = new Retrofit.Builder()
+        final Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.coinmarketcap.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
@@ -79,24 +103,25 @@ public class MainActivity extends AppCompatActivity {
                     item.setPrice_btc(items.get(i).getPrice_btc());
                     list.add(item);
                 }
-                loadFirstTen();
-                myAdapter=new MyAdapter(getApplicationContext(), loadFirstTen());
-                myAdapter.setLoadMoreListener(new MyAdapter.OnLoadMoreListener() {
-                    @Override
-                    public void onLoadMore() {
-                        recyclerView.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                int index = list.size() - 1;
-                                loadMore(index);
-                            }
-                        });
-                    }
-                });
+                //loadFirstTen();
+                //myAdapter=new MyAdapter(getApplicationContext(), list);
+                recyclerViewAdapter=new RecyclerViewAdapter(list, recyclerView, getApplicationContext());
+//                myAdapter.setLoadMoreListener(new MyAdapter.OnLoadMoreListener() {
+//                    @Override
+//                    public void onLoadMore() {
+//                        recyclerView.post(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                int index = list.size() - 1;
+//                                loadMore(index);
+//                            }
+//                        });
+//                    }
+//                });
                 Log.d("size", list.size()+"");
                 RecyclerView.LayoutManager recyce = new LinearLayoutManager(MainActivity.this);
                 recyclerView.setLayoutManager(recyce);
-                recyclerView.setAdapter(myAdapter);
+                recyclerView.setAdapter(recyclerViewAdapter);
 
 
             }
