@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 //loadFirstTen();
                 //myAdapter=new MyAdapter(getApplicationContext(), list);
-                recyclerViewAdapter=new RecyclerViewAdapter(list, recyclerView, getApplicationContext());
+                recyclerViewAdapter=new RecyclerViewAdapter(list, getApplicationContext());
 //                myAdapter.setLoadMoreListener(new MyAdapter.OnLoadMoreListener() {
 //                    @Override
 //                    public void onLoadMore() {

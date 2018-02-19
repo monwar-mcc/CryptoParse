@@ -12,7 +12,7 @@ import java.util.List;
 class RecyclerViewAdapter extends RecyclerView.Adapter<CommonViewHolder>{
     List<Item>list;
     Context context;
-    public RecyclerViewAdapter(List<Item> list, RecyclerView recyclerView, Context applicationContext) {
+    public RecyclerViewAdapter(List<Item> list, Context applicationContext) {
         this.list=list;
         context=applicationContext;
     }

@@ -11,7 +11,6 @@ public class MyViewHolder extends RecyclerView.ViewHolder{
 
     public MyViewHolder(View itemView) {
         super(itemView);
-
         rank = itemView.findViewById(R.id.ranking);
         name = itemView.findViewById(R.id.name);
     }
