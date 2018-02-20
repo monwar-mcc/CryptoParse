@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     List<Item>list=new ArrayList<>();
     RecyclerView recyclerView;
     ProgressBar progressBar;
-    MyAdapter myAdapter;
+   // MyAdapter myAdapter;
     List<Item>dummy=new ArrayList<>();
     //RecyclerViewAdapter recyclerViewAdapter;
     @Override
