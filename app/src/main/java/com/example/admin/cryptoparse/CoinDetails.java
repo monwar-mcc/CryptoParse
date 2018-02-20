@@ -1,30 +1,53 @@
 package com.example.admin.cryptoparse;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Date;
 
 public class CoinDetails extends AppCompatActivity {
-    Item item =new Item();
-    TextView textView;
+    TextView title, year, desc;
+    ImageView img;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coin_details);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        item = (Item) getIntent().getSerializableExtra("data");
-        Log.d("data", item.toString());
-        textView=findViewById(R.id.details);
-        long lg=Long.parseLong(item.getLast_updated());
-        textView.setText("Rank "+"1"+"\n"+"Name "+item.getName()+"\n"+"Price "+item.getPrice_usd()+" USD"+"\n"+"Last Updated \n"+new Date(lg));
+        initView();
+        getDeatilsData();
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        finish();
+    public void initView(){
+        title =(TextView) findViewById(R.id.titleTxt);
+        year =(TextView) findViewById(R.id.yearTxt);
+        desc =(TextView) findViewById(R.id.descTxt);
+        img =(ImageView) findViewById(R.id.imgPoster);
+
+    }
+
+    public  void getDeatilsData(){
+
+        Bundle extras = getIntent().getExtras();
+        String mTitle = null,myear = null,mDesc = null;
+
+
+        if (extras != null) {
+            mTitle = extras.getString("mMovieTitle");
+            myear = extras.getString("mYear");
+            mDesc = extras.getString("mMovieDesc");
+        }
+
+        Intent intent = getIntent();
+        Bitmap bitmap = (Bitmap) intent.getParcelableExtra("mPosterImg");
+
+        title.setText(mTitle.toString());
+        year.setText(myear.toString());
+        desc.setText(mDesc.toString());
+        img.setImageBitmap(bitmap);
+
     }
 }
