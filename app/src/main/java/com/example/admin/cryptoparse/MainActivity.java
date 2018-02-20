@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Handler;
+import android.os.Parcelable;
 import android.provider.Settings;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     public Snackbar snackbar;
     private boolean internetConnected=true;
     private CoordinatorLayout coordinatorLayout;
-
+    List<Result> results=new ArrayList<>();
     private static final String TAG = "MainActivity";
 
     PaginationAdapter adapter;
@@ -115,7 +116,17 @@ public class MainActivity extends AppCompatActivity {
 
         detectConnection();
     }
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList("key", (ArrayList<? extends Parcelable>) results);
+    }
 
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        results=savedInstanceState.getParcelableArrayList("key");
+    }
     private void initListener() {
         adapter = new PaginationAdapter(this);
 

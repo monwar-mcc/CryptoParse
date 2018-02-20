@@ -1,15 +1,19 @@
 package com.example.admin.cryptoparse;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
 
-public class Result {
+public class Result implements Parcelable{
 
     @SerializedName("poster_path")
     @Expose
@@ -306,4 +310,54 @@ public class Result {
         this.voteAverage = voteAverage;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(posterPath);
+        dest.writeByte((byte) (adult ? 1 : 0));
+        dest.writeString(overview);
+        dest.writeInt(id);
+        dest.writeString(originalTitle);
+        dest.writeString(originalLanguage);
+        dest.writeString(posterPath);
+        dest.writeString(title);
+        dest.writeString(backdropPath);
+        dest.writeDouble(popularity);
+        dest.writeInt(voteCount);
+        dest.writeByte((byte) (video ? 1 : 0));
+        dest.writeDouble(voteAverage);
+
+    }
+    public static final Parcelable.Creator<Result> CREATOR = new Parcelable.Creator<Result>() {
+        public Result createFromParcel(Parcel in) {
+            return new Result(in);
+        }
+
+        public Result[] newArray(int size) {
+            return new Result[size];
+        }
+    };
+
+    public Result(Parcel in){
+        posterPath=in.readString();
+        adult=in.readByte()!=0;
+        overview=in.readString();
+        id=in.readInt();
+        originalTitle=in.readString();
+        originalLanguage=in.readString();
+        posterPath=in.readString();
+        title=in.readString();
+        backdropPath=in.readString();
+        popularity=in.readDouble();
+        voteCount=in.readInt();
+        video=in.readByte()!=0;
+        voteAverage=in.readDouble();
+    }
+    public Result(){
+
+    }
 }
