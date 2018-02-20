@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -326,10 +327,11 @@ public class MainActivity extends AppCompatActivity {
         }
         snackbar = Snackbar
                 .make(coordinatorLayout, internetStatus, Snackbar.LENGTH_LONG)
-                .setAction("X", new View.OnClickListener() {
+                .setAction("Connect", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        snackbar.dismiss();
+                        Intent intent=new Intent(Settings.ACTION_WIFI_SETTINGS);
+                        startActivity(intent);
                     }
                 });
         // Changing message text color
@@ -346,8 +348,11 @@ public class MainActivity extends AppCompatActivity {
         }else{
             if(!internetConnected){
                 internetConnected=true;
-                snackbar.show();
+                //snackbar.show();
+                loadFirstPage();
             }
         }
     }
+
+
 }
